@@ -80,7 +80,8 @@ void transform_matrix_snail (int matrix[][N]) {
   // Counters in loops
   int i = 0;
   int j = 0;
-  
+
+  // Fill sequences from left to right
   while (end - start >= 0) {
     int n = 0;
     
@@ -101,6 +102,7 @@ void transform_matrix_snail (int matrix[][N]) {
   end = N - 1;
   accumulator = N + 1;
   j = N - 1;
+  // Fill sequences from top to bottom
   while (end - start >= 0) {
     int n = 0;
 
@@ -121,6 +123,7 @@ void transform_matrix_snail (int matrix[][N]) {
   end = 0;
   accumulator = N * 2;
   i = N - 1;
+  // Fill sequences from right to left
   while (start - end >= 0) {
     int n = 0;
 
@@ -141,6 +144,7 @@ void transform_matrix_snail (int matrix[][N]) {
   end = 1;
   accumulator = N * 3 - 1;
   j = 0;
+  // Fill sequences from bottom to top
   while (start - end >= 0) {
     int n = 0;
 
