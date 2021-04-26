@@ -3,3 +3,6 @@ main: main.c
 
 test: main.c
 	gcc -g -O0 main.c -o test
+
+clean:
+	rm main test

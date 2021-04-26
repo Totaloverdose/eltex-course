@@ -10,3 +10,6 @@ $(LIBNAME): $(OBJS)
 
 $(LIBDIR)/%.o: $(LIBDIR)/%.c
 	gcc -c $< -o $@
+
+clean:
+	rm $(OBJS) main

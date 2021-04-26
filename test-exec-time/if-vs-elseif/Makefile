@@ -5,3 +5,6 @@ if-if: if-if.c
 
 if-elseif: if-elseif.c
 	gcc if-elseif.c -o if-elseif
+
+clean:
+	rm if-elseif if-if
