@@ -1,4 +1,5 @@
 /* Won't separate modules for time saving (have ideas for splitting though) */
+// Can't allocate memory to read bin directory
 
 #include <termios.h>
 #include <sys/ioctl.h>
@@ -25,6 +26,9 @@
 #define SELECTED_FILE_COLOR COLOR_BLACK
 #define SELECTED_BGR_COLOR COLOR_GREEN
 
+#define LEFT_WIN_START_COL 1
+#define RIGHT_WIN_START_COL COLS / 2 + 1
+
 
 enum file_type { FILE_T, DIR_T, LINK_T };
 enum color_pair_type {
@@ -46,8 +50,8 @@ void reinit_windows();
 void redraw_and_print_selection();
 void print_background(WINDOW** win, int rows_count, int cols_count);
 void enter_selected_dir();
-void make_file_list(struct file_data** w_files_data, int* w_file_arr_size,
-                    int* w_files_count, const char* w_dir_path);
+void make_file_list(struct file_data** w_files_data, unsigned long* w_file_arr_size,
+                    unsigned long* w_files_count, const char* w_dir_path);
 enum file_type get_file_type(mode_t f_mode);
 bool file_has_read_permission(mode_t f_mode);
 bool file_has_exec_permission(mode_t f_mode);
@@ -56,6 +60,9 @@ void move_down();
 void move_up();
 void switch_window();
 void init_pairs();
+bool is_accessable_directory(struct file_data fdata);
+void check_row_number_correct();
+void print_working_paths();
 
 
 WINDOW* left_window;
@@ -66,16 +73,17 @@ WINDOW* selection_win;
 
 bool window_is_switched;
 int current_row;
+int current_min_row;
+int current_max_row;
 
 struct file_data* lw_files_data;
 struct file_data* rw_files_data;
-int lw_file_arr_size;
-int lw_files_count;
-int rw_file_arr_size;
-int rw_files_count;
+unsigned long lw_file_arr_size;
+unsigned long lw_files_count;
+unsigned long rw_file_arr_size;
+unsigned long rw_files_count;
 char* lw_cur_dir;
 char* rw_cur_dir;
-
 
 int main()
 {  
@@ -114,17 +122,24 @@ int main()
     
     switch (key) {
     case KEY_DOWN:
+    case 's':
       move_down();
       break;
     case KEY_UP:
+    case 'w':
       move_up();
       break;
     case KEY_RIGHT:
+    case 'd':
     case KEY_LEFT:
+    case 'a':
       switch_window();
       break;
     case KEY_ENTER:
-      /* enter_selected_dir(); */
+    case 'e':
+    case '\n':
+      enter_selected_dir();
+      break;
     default:
       continue;
     }
@@ -181,9 +196,11 @@ void reinit_screen()
   
   make_file_list(&lw_files_data, &lw_file_arr_size, &lw_files_count, lw_cur_dir);
   print_file_list(left_subwin, lw_files_data, lw_files_count);
-  
+
+  check_row_number_correct();
   redraw_and_print_selection();
-  
+
+  print_working_paths();
   print_down_menu();
 }
 
@@ -202,13 +219,13 @@ void reinit_windows()
 
   init_pairs();
 
-  start_x = start_y = 1;
+  start_x = start_y = LEFT_WIN_START_COL;
   width = COLS / 2 - 2;
   height = LINES - 2;
   left_window = newwin(height, width, start_y, start_x);
   left_subwin = derwin(left_window, height - 2, width - 2, 1, 1);
 
-  start_x = COLS / 2 + 1;
+  start_x = RIGHT_WIN_START_COL;
   right_window = newwin(height, width, start_y, start_x);
   right_subwin = derwin(right_window, height - 2, width - 2, 1, 1);
   
@@ -277,26 +294,33 @@ void redraw_and_print_selection()
   wrefresh(selection_win);
 }
 
-void make_file_list(struct file_data** w_files_data, int* w_file_arr_size,
-                    int* w_files_count, const char* w_dir_path)
+void make_file_list(struct file_data** w_files_data, unsigned long* w_file_arr_size,
+                    unsigned long* w_files_count, const char* w_dir_path)
 {  
   if (NULL == *w_files_data) {
     *w_file_arr_size = 64;
     *w_files_data = calloc(*w_file_arr_size, sizeof(struct file_data));
   }
 
-  DIR* dir_stream = opendir(w_dir_path);
-  if (NULL == dir_stream) {
+  struct dirent** dir_entries;
+  int entries_count = scandir(w_dir_path, &dir_entries, NULL, alphasort);
+  if (0 > entries_count) {
     print_error(__LINE__ - 2, __FUNCTION__, GEN_ERR, errno);
     exit(EXIT_FAILURE);
   }
 
   *w_files_count = 0;
 
-  for (struct dirent* dir_entry = readdir(dir_stream); NULL != dir_entry; dir_entry = readdir(dir_stream)) {
+  for (int i = 0; i < entries_count; i++) {
     char cur_f_name[NAME_MAX];
-    strcpy(cur_f_name, dir_entry->d_name);
+    strcpy(cur_f_name, dir_entries[i]->d_name);
     if (0 == strcmp(cur_f_name, ".")) {
+      free(dir_entries[i]);
+      continue;
+    }
+
+    if (0 == strcmp(w_dir_path, "/") && 0 == strcmp(cur_f_name, "..")) {
+      free(dir_entries[i]);
       continue;
     }
 
@@ -313,9 +337,14 @@ void make_file_list(struct file_data** w_files_data, int* w_file_arr_size,
     struct stat cur_f_stat;
     int retval = stat(cur_file_path, &cur_f_stat);
     if (0 > retval) {
-      print_error(__LINE__ - 2, __FUNCTION__, GEN_ERR, errno);
-      fprintf(stderr, "%s\n", cur_file_path);
-      exit(EXIT_FAILURE);
+      if (ENOENT != errno) {
+        print_error(__LINE__ - 2, __FUNCTION__, GEN_ERR, errno);
+        fprintf(stderr, "%s\n", cur_file_path);
+        exit(EXIT_FAILURE);
+      } else {
+        remove(cur_file_path);
+        continue;
+      }
     }
 
     strcpy((*w_files_data)[*w_files_count].f_name, cur_f_name);
@@ -324,10 +353,11 @@ void make_file_list(struct file_data** w_files_data, int* w_file_arr_size,
     (*w_files_data)[*w_files_count].has_exec_perm = file_has_exec_permission(cur_f_stat.st_mode);
     
     (*w_files_count)++;
+    free(dir_entries[i]);
   }
 
   
-  closedir(dir_stream);
+  free(dir_entries);
 }
 
 
@@ -430,4 +460,71 @@ void init_pairs()
   init_pair(LINK_COLOR_PAIR, LINK_COLOR, BGR_COLOR);
   init_pair(EXEC_FILE_COLOR_PAIR, EXEC_FILE_COLOR, BGR_COLOR);
   init_pair(SELECTED_FILE_COLOR_PAIR, SELECTED_FILE_COLOR, SELECTED_BGR_COLOR);
+}
+
+void enter_selected_dir()
+{
+  char selected_dir_name[NAME_MAX];
+  char new_dir_buf[PATH_MAX];
+  char* w_cur_dir;
+
+  if (window_is_switched) {
+    if (!is_accessable_directory(rw_files_data[current_row])) {
+      return;
+    }
+    
+    strcpy(selected_dir_name, rw_files_data[current_row].f_name);
+    w_cur_dir = rw_cur_dir;
+  } else {
+    if (!is_accessable_directory(lw_files_data[current_row])) {
+      return;
+    }
+    
+    strcpy(selected_dir_name, lw_files_data[current_row].f_name);
+    w_cur_dir = lw_cur_dir;
+  }
+
+  strcpy(new_dir_buf, w_cur_dir);
+  int dn_length = strlen(new_dir_buf) - 1;
+  if (0 == strcmp(selected_dir_name, "..")) {   
+    while ('/' != new_dir_buf[dn_length]) {
+      new_dir_buf[dn_length] = 0;
+      dn_length--;
+    }
+    if (0 != strcmp(new_dir_buf, "/")) {
+      new_dir_buf[dn_length] = 0;
+    }
+  } else {
+    if ('/' != new_dir_buf[dn_length]){
+      strcat(new_dir_buf, "/");
+    }
+    strcat(new_dir_buf, selected_dir_name);
+  }
+
+  if (0 == access(new_dir_buf, R_OK | X_OK)) {
+    strcpy(w_cur_dir, new_dir_buf);
+  }
+}
+
+bool is_accessable_directory(struct file_data fdata)
+{
+  return DIR_T == fdata.f_type && fdata.has_read_perm && fdata.has_exec_perm;
+}
+
+void check_row_number_correct()
+{
+  int max_row = window_is_switched ? rw_files_count - 1 : lw_files_count - 1;
+
+  if (current_row >= max_row) {
+    current_row = max_row;
+  }
+}
+
+void print_working_paths()
+{
+  move(0, LEFT_WIN_START_COL);
+  printw("%s", lw_cur_dir);
+  move(0, RIGHT_WIN_START_COL);
+  printw("%s", rw_cur_dir);
+  refresh();
 }
