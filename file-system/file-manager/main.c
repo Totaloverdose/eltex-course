@@ -15,6 +15,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <errno.h>
+#include <malloc.h>
 
 #include "print_error.h"
 
@@ -360,8 +361,8 @@ void make_file_list(struct file_data** w_files_data, unsigned long* w_file_arr_s
     strcat(cur_file_path, "/");
     strcat(cur_file_path, cur_f_name);
 
-    if (*w_file_arr_size < *w_files_count) {
-      *w_file_arr_size *= 2;
+    if (*w_file_arr_size == *w_files_count) {
+      (*w_file_arr_size) *= 2;
       *w_files_data = reallocarray(*w_files_data, *w_file_arr_size, sizeof(struct file_data));
     }
 
@@ -558,8 +559,6 @@ bool is_accessable_directory(struct file_data fdata)
 void print_working_paths()
 {
   move(0, LEFT_WIN_START_COL);
-  /* printw("Current row: %d \t Current min row: %d \t Current max row: %d \t FILE_ROWS_COUNT: %d", */
-  /*        lw_selection_data.current_row, lw_selection_data.row_min, lw_selection_data.row_max, FILE_ROWS_COUNT); */
   printw("%s", lw_cur_dir);
   move(0, RIGHT_WIN_START_COL);
   printw("%s", rw_cur_dir);
