@@ -28,6 +28,7 @@
 
 #define LEFT_WIN_START_COL 1
 #define RIGHT_WIN_START_COL COLS / 2 + 1
+#define FILE_ROWS_COUNT LINES - 4
 
 
 enum file_type { FILE_T, DIR_T, LINK_T };
@@ -40,6 +41,12 @@ struct file_data {
   enum file_type f_type;
   bool has_exec_perm;
   bool has_read_perm;
+};
+
+struct selection_data {
+  int current_row;
+  int row_min;
+  int row_max;
 };
 
 void sig_winch(int signo);
@@ -55,14 +62,17 @@ void make_file_list(struct file_data** w_files_data, unsigned long* w_file_arr_s
 enum file_type get_file_type(mode_t f_mode);
 bool file_has_read_permission(mode_t f_mode);
 bool file_has_exec_permission(mode_t f_mode);
-void print_file_list(WINDOW* window, struct file_data* w_files_data, int w_files_count);
-void move_down();
-void move_up();
+void print_file_list(WINDOW* window, struct file_data* w_files_data,
+                     int w_files_count, struct selection_data w_selection_data);
+void move_down(struct selection_data* w_selection_data, int max_row);
+void move_up(struct selection_data* w_selection_data);
 void switch_window();
 void init_pairs();
 bool is_accessable_directory(struct file_data fdata);
 void check_row_number_correct();
 void print_working_paths();
+void update_row_bounds(struct selection_data* w_selection_data, int files_count);
+void end_program();
 
 
 WINDOW* left_window;
@@ -72,9 +82,8 @@ WINDOW* right_subwin;
 WINDOW* selection_win;
 
 bool window_is_switched;
-int current_row;
-int current_min_row;
-int current_max_row;
+struct selection_data lw_selection_data;
+struct selection_data rw_selection_data;
 
 struct file_data* lw_files_data;
 struct file_data* rw_files_data;
@@ -86,32 +95,7 @@ char* lw_cur_dir;
 char* rw_cur_dir;
 
 int main()
-{  
-  char* init_dir = malloc(PATH_MAX);
-  getcwd(init_dir, PATH_MAX);
-  
-  left_window = NULL;
-  right_window = NULL;
-  left_subwin = NULL;
-  right_subwin = NULL;
-  selection_win = NULL;
-
-  window_is_switched = false;
-  current_row = 0;
-
-  lw_files_data = NULL;
-  rw_files_data = NULL;
-  lw_file_arr_size = 0;
-  lw_files_count = 0;
-  rw_file_arr_size = 0;
-  rw_files_count = 0;
-  
-  lw_cur_dir = malloc(PATH_MAX);
-  rw_cur_dir = malloc(PATH_MAX);
-  strcpy(lw_cur_dir, init_dir);
-  strcpy(rw_cur_dir, init_dir);
-  
-
+{ 
   wchar_t key = 'q';
   
   
@@ -123,11 +107,19 @@ int main()
     switch (key) {
     case KEY_DOWN:
     case 's':
-      move_down();
+      if (window_is_switched) {
+        move_down(&rw_selection_data, rw_files_count - 1);
+      } else {
+        move_down(&lw_selection_data, lw_files_count - 1);
+      }
       break;
     case KEY_UP:
     case 'w':
-      move_up();
+      if (window_is_switched) {
+        move_up(&rw_selection_data);
+      } else {
+        move_up(&lw_selection_data);
+      }
       break;
     case KEY_RIGHT:
     case 'd':
@@ -146,21 +138,8 @@ int main()
 
     reinit_screen();
   }
-
-  delwin(selection_win);
-  delwin(left_subwin);
-  delwin(right_subwin);
-  delwin(left_window);
-  delwin(right_window);
-  endwin();
   
-  free(init_dir);
-  free(lw_cur_dir);
-  free(rw_cur_dir);
-  free(lw_files_data);
-  free(rw_files_data);
-  
-  exit(EXIT_SUCCESS);
+  end_program();
 }
 
 void sig_winch(int signo)
@@ -168,13 +147,36 @@ void sig_winch(int signo)
   struct winsize size;
   ioctl(fileno(stdout), TIOCGWINSZ, (char *) &size);
   resizeterm(size.ws_row, size.ws_col);
-  
+
+  update_row_bounds(&lw_selection_data, lw_files_count);
+  update_row_bounds(&rw_selection_data, lw_files_count);
   reinit_screen();
   getch();
 }
 
-void main_init()
+void end_program()
 {
+  delwin(selection_win);
+  delwin(left_subwin);
+  delwin(right_subwin);
+  delwin(left_window);
+  delwin(right_window);
+  endwin();
+  
+  free(lw_cur_dir);
+  free(rw_cur_dir);
+  free(lw_files_data);
+  free(rw_files_data);
+  
+  exit(EXIT_SUCCESS); 
+}
+
+void main_init()
+{ 
+  char* init_dir = malloc(PATH_MAX);
+  getcwd(init_dir, PATH_MAX);
+  
+
   setlocale(LC_CTYPE, "");
   initscr();
   signal(SIGWINCH, sig_winch);
@@ -185,6 +187,32 @@ void main_init()
 
   start_color();
   refresh();
+  
+  
+  left_window = NULL;
+  right_window = NULL;
+  left_subwin = NULL;
+  right_subwin = NULL;
+  selection_win = NULL;
+
+  window_is_switched = false;
+  lw_selection_data.current_row = rw_selection_data.current_row = 0;
+  lw_selection_data.row_min = rw_selection_data.row_min = 0;
+  lw_selection_data.row_max = rw_selection_data.row_max = FILE_ROWS_COUNT - 1;
+
+  lw_files_data = NULL;
+  rw_files_data = NULL;
+  lw_file_arr_size = 0;
+  lw_files_count = 0;
+  rw_file_arr_size = 0;
+  rw_files_count = 0;
+  
+  lw_cur_dir = malloc(PATH_MAX);
+  rw_cur_dir = malloc(PATH_MAX);
+  strcpy(lw_cur_dir, init_dir);
+  strcpy(rw_cur_dir, init_dir);
+  
+  free(init_dir);
 }
 
 void reinit_screen()
@@ -192,12 +220,11 @@ void reinit_screen()
   reinit_windows();
   
   make_file_list(&rw_files_data, &rw_file_arr_size, &rw_files_count, rw_cur_dir);
-  print_file_list(right_subwin, rw_files_data, rw_files_count);
+  print_file_list(right_subwin, rw_files_data, rw_files_count, rw_selection_data);
   
   make_file_list(&lw_files_data, &lw_file_arr_size, &lw_files_count, lw_cur_dir);
-  print_file_list(left_subwin, lw_files_data, lw_files_count);
+  print_file_list(left_subwin, lw_files_data, lw_files_count, lw_selection_data);
 
-  check_row_number_correct();
   redraw_and_print_selection();
 
   print_working_paths();
@@ -242,7 +269,7 @@ void reinit_windows()
 void print_down_menu()
 {
   move(LINES - 1, 1);
-  printw("← → — change column"
+  printw("← → —  column"
          "\t"
          "↑ — Up"
          "\t"
@@ -273,11 +300,13 @@ void redraw_and_print_selection()
   }
 
   if (window_is_switched) {
-    selection_win = derwin(right_subwin, 1, selection_width, current_row, 0);
-    strcpy(selected_file_name, rw_files_data[current_row].f_name);
+    selection_win = derwin(right_subwin, 1, selection_width,
+                           rw_selection_data.current_row - rw_selection_data.row_min, 0);
+    strcpy(selected_file_name, rw_files_data[rw_selection_data.current_row].f_name);
   } else {
-    selection_win = derwin(left_subwin, 1, selection_width, current_row, 0);
-    strcpy(selected_file_name, lw_files_data[current_row].f_name);
+    selection_win = derwin(left_subwin, 1, selection_width,
+                           lw_selection_data.current_row - lw_selection_data.row_min, 0);
+    strcpy(selected_file_name, lw_files_data[lw_selection_data.current_row].f_name);
   }
 
   wattron(selection_win, COLOR_PAIR(SELECTED_FILE_COLOR_PAIR));
@@ -305,7 +334,9 @@ void make_file_list(struct file_data** w_files_data, unsigned long* w_file_arr_s
   struct dirent** dir_entries;
   int entries_count = scandir(w_dir_path, &dir_entries, NULL, alphasort);
   if (0 > entries_count) {
+    endwin();
     print_error(__LINE__ - 2, __FUNCTION__, GEN_ERR, errno);
+    fprintf(stderr, "%s\n", w_dir_path);
     exit(EXIT_FAILURE);
   }
 
@@ -338,6 +369,7 @@ void make_file_list(struct file_data** w_files_data, unsigned long* w_file_arr_s
     int retval = stat(cur_file_path, &cur_f_stat);
     if (0 > retval) {
       if (ENOENT != errno) {
+        endwin();
         print_error(__LINE__ - 2, __FUNCTION__, GEN_ERR, errno);
         fprintf(stderr, "%s\n", cur_file_path);
         exit(EXIT_FAILURE);
@@ -384,9 +416,10 @@ bool file_has_exec_permission(mode_t f_mode)
   return S_IXUSR & f_mode;
 }
 
-void print_file_list(WINDOW* window, struct file_data* w_files_data, int w_files_count)
+void print_file_list(WINDOW* window, struct file_data* w_files_data,
+                     int w_files_count, struct selection_data w_selection_data)
 {
-  for (int i = 0; i < w_files_count; i++) {
+  for (int i = w_selection_data.row_min; i < w_files_count && i <= w_selection_data.row_max; i++) {
     switch (w_files_data[i].f_type) {
     case FILE_T:
       if (!w_files_data[i].has_exec_perm) {
@@ -413,7 +446,7 @@ void print_file_list(WINDOW* window, struct file_data* w_files_data, int w_files
       break;
     }
 
-    wmove(window, i, 0);
+    wmove(window, i - w_selection_data.row_min, 0);
     unsigned long width = COLS / 2 - 4; // COLS cannot be less than 14 in my case
     // If file name length more than we have space, then we print what fits
     if (width >= strlen(w_files_data[i].f_name)) {
@@ -428,29 +461,31 @@ void print_file_list(WINDOW* window, struct file_data* w_files_data, int w_files
   wrefresh(window);
 }
 
-void move_down()
+void move_down(struct selection_data* w_selection_data, int max_row)
 {
-  int max_row = window_is_switched ? rw_files_count - 1 : lw_files_count - 1;
-
-  if (current_row < max_row) {
-    current_row++;
+  if (w_selection_data->current_row < max_row) {
+    w_selection_data->current_row++;
+    if (w_selection_data->current_row > w_selection_data->row_max) {
+      w_selection_data->row_min++;
+      w_selection_data->row_max++;
+    }
   }
 }
 
-void move_up()
+void move_up(struct selection_data* w_selection_data)
 {
-  if (current_row > 0) {
-    current_row--;
+  if (w_selection_data->current_row > 0) {
+    w_selection_data->current_row--;
+    if (w_selection_data->current_row < w_selection_data->row_min) {
+      w_selection_data->row_min--;
+      w_selection_data->row_max--;
+    }
   }
 }
 
 void switch_window()
 {
   window_is_switched = !window_is_switched;
-  int max_row = window_is_switched ? rw_files_count - 1 : lw_files_count - 1;
-  if (current_row > max_row) {
-    current_row = max_row;
-  }
 }
 
 void init_pairs()
@@ -469,18 +504,18 @@ void enter_selected_dir()
   char* w_cur_dir;
 
   if (window_is_switched) {
-    if (!is_accessable_directory(rw_files_data[current_row])) {
+    if (!is_accessable_directory(rw_files_data[rw_selection_data.current_row])) {
       return;
     }
     
-    strcpy(selected_dir_name, rw_files_data[current_row].f_name);
+    strcpy(selected_dir_name, rw_files_data[rw_selection_data.current_row].f_name);
     w_cur_dir = rw_cur_dir;
   } else {
-    if (!is_accessable_directory(lw_files_data[current_row])) {
+    if (!is_accessable_directory(lw_files_data[lw_selection_data.current_row])) {
       return;
     }
     
-    strcpy(selected_dir_name, lw_files_data[current_row].f_name);
+    strcpy(selected_dir_name, lw_files_data[lw_selection_data.current_row].f_name);
     w_cur_dir = lw_cur_dir;
   }
 
@@ -503,6 +538,15 @@ void enter_selected_dir()
 
   if (0 == access(new_dir_buf, R_OK | X_OK)) {
     strcpy(w_cur_dir, new_dir_buf);
+    if (window_is_switched) {
+      rw_selection_data.current_row = 0;
+      rw_selection_data.row_min = 0;
+      update_row_bounds(&rw_selection_data, lw_files_count);
+    } else {
+      lw_selection_data.current_row = 0;
+      lw_selection_data.row_min = 0;
+      update_row_bounds(&lw_selection_data, lw_files_count);
+    }
   }
 }
 
@@ -511,20 +555,36 @@ bool is_accessable_directory(struct file_data fdata)
   return DIR_T == fdata.f_type && fdata.has_read_perm && fdata.has_exec_perm;
 }
 
-void check_row_number_correct()
-{
-  int max_row = window_is_switched ? rw_files_count - 1 : lw_files_count - 1;
-
-  if (current_row >= max_row) {
-    current_row = max_row;
-  }
-}
-
 void print_working_paths()
 {
   move(0, LEFT_WIN_START_COL);
+  /* printw("Current row: %d \t Current min row: %d \t Current max row: %d \t FILE_ROWS_COUNT: %d", */
+  /*        lw_selection_data.current_row, lw_selection_data.row_min, lw_selection_data.row_max, FILE_ROWS_COUNT); */
   printw("%s", lw_cur_dir);
   move(0, RIGHT_WIN_START_COL);
   printw("%s", rw_cur_dir);
   refresh();
+}
+
+void update_row_bounds(struct selection_data* w_selection_data, int files_count)
+{
+  const int cur_file_rows_count = FILE_ROWS_COUNT; // It changes in parallel, so we need to save it
+  const int min_to_cur = w_selection_data->current_row - w_selection_data->row_min;
+  const int cur_to_max = w_selection_data->row_max - w_selection_data->current_row;
+  
+  if (min_to_cur > cur_to_max) {
+    w_selection_data->row_min = w_selection_data->row_max - cur_file_rows_count + 1;
+  } else {
+    w_selection_data->row_max = w_selection_data->row_min + cur_file_rows_count - 1;
+  }
+
+  if (files_count <= w_selection_data->row_max) {
+    w_selection_data->row_max = files_count - 1;
+    w_selection_data->row_min = w_selection_data->row_max - cur_file_rows_count + 1;
+  }
+
+  if (0 > w_selection_data->row_min) {
+    w_selection_data->row_min = 0;
+    w_selection_data->row_max = FILE_ROWS_COUNT - 1;
+  }
 }
