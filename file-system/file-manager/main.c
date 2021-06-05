@@ -1,5 +1,4 @@
 /* Won't separate modules for time saving (have ideas for splitting though) */
-// Can't allocate memory to read bin directory
 
 #include <termios.h>
 #include <sys/ioctl.h>
