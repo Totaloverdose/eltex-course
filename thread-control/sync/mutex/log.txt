@@ -1,0 +1,719 @@
+Mega Super Duper Puper Realistic World Simulation
+5 shops, 3 customers, 5 suppliers
+
+
+Shop 1 has 1316 products for start
+Shop 2 has 503 products for start
+Shop 3 has 1130 products for start
+Shop 4 has 602 products for start
+Shop 5 has 850 products for start
+
+Customer 1: I am ready to shopping!!!
+Customer 1: I need 3414 products for now
+Customer 1: Hooray, I am finally in the shop 2!
+Customer 1: I've bought 503 products
+Customer 1: But I still need 2911 products...
+
+Customer 1: Shopping is tiresome... I need to sleep
+
+Customer 2: I am ready to shopping!!!
+Customer 2: I need 4099 products for now
+Customer 2: Hooray, I am finally in the shop 3!
+Customer 2: I've bought 1130 products
+Customer 2: But I still need 2969 products...
+
+Customer 2: Shopping is tiresome... I need to sleep
+
+Customer 3: I am ready to shopping!!!
+Customer 3: I need 3576 products for now
+Customer 3: Hooray, I am finally in the shop 2!
+Customer 3: I've bought 0 products
+Customer 3: But I still need 3576 products...
+
+Customer 3: Shopping is tiresome... I need to sleep
+
+Supplier 1: I am ready to supplying!
+Supplier 1: Entered in Shop number 2
+Supplier 1: Shop 2 has 0 products
+Supplier 1: Delivered 749 products to Shop 749
+Supplier 1: Now Shop 2 has 749 products
+
+Supplier 1: I need to sleep before another delivery
+
+Supplier 2: I am ready to supplying!
+Supplier 2: Entered in Shop number 2
+Supplier 2: Shop 2 has 749 products
+Supplier 2: Delivered 703 products to Shop 1452
+Supplier 2: Now Shop 2 has 1452 products
+
+Supplier 2: I need to sleep before another delivery
+
+Supplier 3: I am ready to supplying!
+Supplier 3: Entered in Shop number 5
+Supplier 3: Shop 5 has 850 products
+Supplier 3: Delivered 358 products to Shop 1208
+Supplier 3: Now Shop 5 has 1208 products
+
+Supplier 3: I need to sleep before another delivery
+
+Supplier 4: I am ready to supplying!
+Supplier 4: Entered in Shop number 5
+Supplier 4: Shop 5 has 1208 products
+Supplier 4: Delivered 472 products to Shop 1680
+Supplier 4: Now Shop 5 has 1680 products
+
+Supplier 4: I need to sleep before another delivery
+
+Supplier 5: I am ready to supplying!
+Supplier 5: Entered in Shop number 2
+Supplier 5: Shop 2 has 1452 products
+Supplier 5: Delivered 508 products to Shop 1960
+Supplier 5: Now Shop 2 has 1960 products
+
+Supplier 5: I need to sleep before another delivery
+
+Supplier 1: I am ready to supplying!
+Supplier 1: Entered in Shop number 1
+Supplier 1: Shop 1 has 1316 products
+Supplier 1: Delivered 749 products to Shop 2065
+Supplier 1: Now Shop 1 has 2065 products
+
+Supplier 1: I need to sleep before another delivery
+
+Supplier 3: I am ready to supplying!
+Supplier 3: Entered in Shop number 3
+Supplier 3: Shop 3 has 0 products
+Supplier 3: Delivered 358 products to Shop 358
+Supplier 3: Now Shop 3 has 358 products
+
+Supplier 3: I need to sleep before another delivery
+
+Supplier 5: I am ready to supplying!
+Supplier 5: Entered in Shop number 2
+Supplier 5: Shop 2 has 1960 products
+Supplier 2: I am ready to supplying!
+Supplier 5: Delivered 508 products to Shop 2468
+Supplier 4: I am ready to supplying!
+Supplier 4: Entered in Shop number 1
+Supplier 4: Shop 1 has 2065 products
+Supplier 4: Delivered 472 products to Shop 2537
+Supplier 4: Now Shop 1 has 2537 products
+
+Supplier 4: I need to sleep before another delivery
+
+Supplier 5: Now Shop 2 has 2468 products
+
+Supplier 5: I need to sleep before another delivery
+
+Supplier 2: Entered in Shop number 2
+Supplier 2: Shop 2 has 2468 products
+Supplier 2: Delivered 703 products to Shop 3171
+Supplier 2: Now Shop 2 has 3171 products
+
+Supplier 2: I need to sleep before another delivery
+
+Supplier 1: I am ready to supplying!
+Supplier 1: Entered in Shop number 3
+Supplier 1: Shop 3 has 358 products
+Supplier 1: Delivered 749 products to Shop 1107
+Supplier 1: Now Shop 3 has 1107 products
+
+Supplier 1: I need to sleep before another delivery
+
+Supplier 3: I am ready to supplying!
+Supplier 3: Entered in Shop number 2
+Supplier 3: Shop 2 has 3171 products
+Supplier 3: Delivered 358 products to Shop 3529
+Supplier 3: Now Shop 2 has 3529 products
+
+Supplier 3: I need to sleep before another delivery
+
+Supplier 5: I am ready to supplying!
+Supplier 5: Entered in Shop number 2
+Supplier 5: Shop 2 has 3529 products
+Supplier 5: Delivered 508 products to Shop 4037
+Supplier 5: Now Shop 2 has 4037 products
+
+Supplier 5: I need to sleep before another delivery
+
+Supplier 2: I am ready to supplying!
+Supplier 2: Entered in Shop number 1
+Supplier 2: Shop 1 has 2537 products
+Supplier 4: I am ready to supplying!
+Supplier 2: Delivered 703 products to Shop 3240
+Supplier 4: Entered in Shop number 4
+Supplier 2: Now Shop 1 has 3240 products
+Supplier 4: Shop 4 has 602 products
+
+Supplier 4: Delivered 472 products to Shop 1074
+Supplier 4: Now Shop 4 has 1074 products
+Supplier 2: I need to sleep before another delivery
+
+
+Supplier 4: I need to sleep before another delivery
+
+Customer 1: I am ready to shopping!!!
+Customer 1: I need 2911 products for now
+Customer 1: Hooray, I am finally in the shop 5!
+Customer 1: I've bought 1680 products
+Customer 1: But I still need 1231 products...
+
+Customer 1: Shopping is tiresome... I need to sleep
+
+Customer 3: I am ready to shopping!!!
+Customer 3: I need 3576 products for now
+Customer 3: Hooray, I am finally in the shop 5!
+Customer 3: I've bought 0 products
+Customer 3: But I still need 3576 products...
+
+Customer 3: Shopping is tiresome... I need to sleep
+
+Customer 2: I am ready to shopping!!!
+Customer 2: I need 2969 products for now
+Customer 2: Hooray, I am finally in the shop 3!
+Customer 2: I've bought 1107 products
+Customer 2: But I still need 1862 products...
+
+Customer 2: Shopping is tiresome... I need to sleep
+
+Supplier 1: I am ready to supplying!
+Supplier 1: Entered in Shop number 3
+Supplier 1: Shop 3 has 0 products
+Supplier 1: Delivered 749 products to Shop 749
+Supplier 1: Now Shop 3 has 749 products
+
+Supplier 1: I need to sleep before another delivery
+
+Supplier 3: I am ready to supplying!
+Supplier 3: Entered in Shop number 5
+Supplier 3: Shop 5 has 0 products
+Supplier 3: Delivered 358 products to Shop 358
+Supplier 3: Now Shop 5 has 358 products
+
+Supplier 3: I need to sleep before another delivery
+
+Supplier 5: I am ready to supplying!
+Supplier 5: Entered in Shop number 2
+Supplier 5: Shop 2 has 4037 products
+Supplier 5: Delivered 508 products to Shop 4545
+Supplier 5: Now Shop 2 has 4545 products
+
+Supplier 5: I need to sleep before another delivery
+
+Supplier 2: I am ready to supplying!
+Supplier 2: Entered in Shop number 4
+Supplier 2: Shop 4 has 1074 products
+Supplier 2: Delivered 703 products to Shop 1777
+Supplier 2: Now Shop 4 has 1777 products
+
+Supplier 2: I need to sleep before another delivery
+
+Supplier 4: I am ready to supplying!
+Supplier 4: Entered in Shop number 3
+Supplier 4: Shop 3 has 749 products
+Supplier 4: Delivered 472 products to Shop 1221
+Supplier 4: Now Shop 3 has 1221 products
+
+Supplier 4: I need to sleep before another delivery
+
+Supplier 1: I am ready to supplying!
+Supplier 1: Entered in Shop number 3
+Supplier 1: Shop 3 has 1221 products
+Supplier 1: Delivered 749 products to Shop 1970
+Supplier 1: Now Shop 3 has 1970 products
+
+Supplier 1: I need to sleep before another delivery
+
+Supplier 3: I am ready to supplying!
+Supplier 3: Entered in Shop number 4
+Supplier 3: Shop 4 has 1777 products
+Supplier 3: Delivered 358 products to Shop 2135
+Supplier 3: Now Shop 4 has 2135 products
+
+Supplier 3: I need to sleep before another delivery
+
+Supplier 5: I am ready to supplying!
+Supplier 5: Entered in Shop number 1
+Supplier 5: Shop 1 has 3240 products
+Supplier 5: Delivered 508 products to Shop 3748
+Supplier 5: Now Shop 1 has 3748 products
+
+Supplier 5: I need to sleep before another delivery
+
+Supplier 2: I am ready to supplying!
+Supplier 2: Entered in Shop number 3
+Supplier 2: Shop 3 has 1970 products
+Supplier 2: Delivered 703 products to Shop 2673
+Supplier 2: Now Shop 3 has 2673 products
+
+Supplier 2: I need to sleep before another delivery
+
+Supplier 4: I am ready to supplying!
+Supplier 4: Entered in Shop number 2
+Supplier 4: Shop 2 has 4545 products
+Supplier 4: Delivered 472 products to Shop 5017
+Supplier 4: Now Shop 2 has 5017 products
+
+Supplier 4: I need to sleep before another delivery
+
+Supplier 1: I am ready to supplying!
+Supplier 1: Entered in Shop number 4
+Supplier 1: Shop 4 has 2135 products
+Supplier 1: Delivered 749 products to Shop 2884
+Supplier 1: Now Shop 4 has 2884 products
+
+Supplier 1: I need to sleep before another delivery
+
+Supplier 2: I am ready to supplying!
+Supplier 2: Entered in Shop number 2
+Supplier 2: Shop 2 has 5017 products
+Supplier 2: Delivered 703 products to Shop 5720
+Supplier 2: Now Shop 2 has 5720 products
+
+Supplier 2: I need to sleep before another delivery
+
+Supplier 4: I am ready to supplying!
+Supplier 4: Entered in Shop number 5
+Supplier 4: Shop 5 has 358 products
+Supplier 4: Delivered 472 products to Shop 830
+Supplier 4: Now Shop 5 has 830 products
+
+Supplier 4: I need to sleep before another delivery
+
+Supplier 3: I am ready to supplying!
+Supplier 3: Entered in Shop number 3
+Supplier 3: Shop 3 has 2673 products
+Supplier 3: Delivered 358 products to Shop 3031
+Supplier 3: Now Shop 3 has 3031 products
+
+Supplier 3: I need to sleep before another delivery
+
+Supplier 5: I am ready to supplying!
+Supplier 5: Entered in Shop number 3
+Supplier 5: Shop 3 has 3031 products
+Supplier 5: Delivered 508 products to Shop 3539
+Supplier 5: Now Shop 3 has 3539 products
+
+Supplier 5: I need to sleep before another delivery
+
+Customer 1: I am ready to shopping!!!
+Customer 1: I need 1231 products for now
+Customer 1: Hooray, I am finally in the shop 5!
+Customer 1: I've bought 830 products
+Customer 1: But I still need 401 products...
+
+Customer 1: Shopping is tiresome... I need to sleep
+
+Customer 2: I am ready to shopping!!!
+Customer 2: I need 1862 products for now
+Customer 2: Hooray, I am finally in the shop 2!
+Customer 2: I've bought 5720 products
+Customer 2: And I don't need anymore!
+
+Customer 2: Shopping is tiresome... I need to sleep
+
+Customer 3: I am ready to shopping!!!
+Customer 3: I need 3576 products for now
+Customer 3: Hooray, I am finally in the shop 2!
+Customer 3: I've bought 0 products
+Customer 3: But I still need 3576 products...
+
+Customer 3: Shopping is tiresome... I need to sleep
+
+Supplier 1: I am ready to supplying!
+Supplier 1: Entered in Shop number 5
+Supplier 1: Shop 5 has 0 products
+Supplier 1: Delivered 749 products to Shop 749
+Supplier 1: Now Shop 5 has 749 products
+
+Supplier 1: I need to sleep before another delivery
+
+Supplier 2: I am ready to supplying!
+Supplier 2: Entered in Shop number 2
+Supplier 2: Shop 2 has 0 products
+Supplier 2: Delivered 703 products to Shop 703
+Supplier 2: Now Shop 2 has 703 products
+
+Supplier 2: I need to sleep before another delivery
+
+Supplier 4: I am ready to supplying!
+Supplier 4: Entered in Shop number 3
+Supplier 4: Shop 3 has 3539 products
+Supplier 4: Delivered 472 products to Shop 4011
+Supplier 4: Now Shop 3 has 4011 products
+
+Supplier 4: I need to sleep before another delivery
+
+Supplier 3: I am ready to supplying!
+Supplier 3: Entered in Shop number 4
+Supplier 3: Shop 4 has 2884 products
+Supplier 3: Delivered 358 products to Shop 3242
+Supplier 3: Now Shop 4 has 3242 products
+
+Supplier 3: I need to sleep before another delivery
+
+Supplier 5: I am ready to supplying!
+Supplier 5: Entered in Shop number 4
+Supplier 5: Shop 4 has 3242 products
+Supplier 5: Delivered 508 products to Shop 3750
+Supplier 5: Now Shop 4 has 3750 products
+
+Supplier 5: I need to sleep before another delivery
+
+Supplier 1: I am ready to supplying!
+Supplier 1: Entered in Shop number 5
+Supplier 1: Shop 5 has 749 products
+Supplier 1: Delivered 749 products to Shop 1498
+Supplier 1: Now Shop 5 has 1498 products
+
+Supplier 1: I need to sleep before another delivery
+
+Supplier 2: I am ready to supplying!
+Supplier 2: Entered in Shop number 5
+Supplier 2: Shop 5 has 1498 products
+Supplier 2: Delivered 703 products to Shop 2201
+Supplier 2: Now Shop 5 has 2201 products
+
+Supplier 2: I need to sleep before another delivery
+
+Supplier 4: I am ready to supplying!
+Supplier 4: Entered in Shop number 5
+Supplier 4: Shop 5 has 2201 products
+Supplier 4: Delivered 472 products to Shop 2673
+Supplier 4: Now Shop 5 has 2673 products
+
+Supplier 4: I need to sleep before another delivery
+
+Supplier 3: I am ready to supplying!
+Supplier 3: Entered in Shop number 1
+Supplier 3: Shop 1 has 3748 products
+Supplier 3: Delivered 358 products to Shop 4106
+Supplier 3: Now Shop 1 has 4106 products
+
+Supplier 3: I need to sleep before another delivery
+
+Supplier 5: I am ready to supplying!
+Supplier 5: Entered in Shop number 2
+Supplier 5: Shop 2 has 703 products
+Supplier 5: Delivered 508 products to Shop 1211
+Supplier 5: Now Shop 2 has 1211 products
+
+Supplier 5: I need to sleep before another delivery
+
+Supplier 2: I am ready to supplying!
+Supplier 4: I am ready to supplying!
+Supplier 4: Entered in Shop number 1
+Supplier 4: Shop 1 has 4106 products
+Supplier 4: Delivered 472 products to Shop 4578
+Supplier 4: Now Shop 1 has 4578 products
+Supplier 2: Entered in Shop number 2
+
+Supplier 2: Shop 2 has 1211 products
+Supplier 2: Delivered 703 products to Shop 1914
+Supplier 4: I need to sleep before another delivery
+
+Supplier 2: Now Shop 2 has 1914 products
+
+Supplier 2: I need to sleep before another delivery
+
+Supplier 1: I am ready to supplying!
+Supplier 1: Entered in Shop number 2
+Supplier 1: Shop 2 has 1914 products
+Supplier 1: Delivered 749 products to Shop 2663
+Supplier 1: Now Shop 2 has 2663 products
+
+Supplier 1: I need to sleep before another delivery
+
+Supplier 3: I am ready to supplying!
+Supplier 3: Entered in Shop number 1
+Supplier 3: Shop 1 has 4578 products
+Supplier 3: Delivered 358 products to Shop 4936
+Supplier 3: Now Shop 1 has 4936 products
+
+Supplier 3: I need to sleep before another delivery
+
+Supplier 5: I am ready to supplying!
+Supplier 5: Entered in Shop number 1
+Supplier 5: Shop 1 has 4936 products
+Supplier 5: Delivered 508 products to Shop 5444
+Supplier 5: Now Shop 1 has 5444 products
+
+Supplier 5: I need to sleep before another delivery
+
+Customer 1: I am ready to shopping!!!
+Customer 1: I need 401 products for now
+Customer 3: I am ready to shopping!!!
+Customer 1: Hooray, I am finally in the shop 4!
+Customer 3: I need 3576 products for now
+Customer 1: I've bought 3750 products
+Customer 1: And I don't need anymore!
+
+Customer 1: Shopping is tiresome... I need to sleep
+
+Customer 2: Ok, I've got all what I need. Let's go home
+Customer 3: Hooray, I am finally in the shop 4!
+Customer 3: I've bought 0 products
+Customer 3: But I still need 3576 products...
+
+Customer 3: Shopping is tiresome... I need to sleep
+
+Supplier 4: I am ready to supplying!
+Supplier 4: Entered in Shop number 5
+Supplier 4: Shop 5 has 2673 products
+Supplier 2: I am ready to supplying!
+Supplier 4: Delivered 472 products to Shop 3145
+Supplier 2: Entered in Shop number 2
+Supplier 4: Now Shop 5 has 3145 products
+
+Supplier 4: I need to sleep before another delivery
+
+Supplier 2: Shop 2 has 2663 products
+Supplier 2: Delivered 703 products to Shop 3366
+Supplier 2: Now Shop 2 has 3366 products
+
+Supplier 2: I need to sleep before another delivery
+
+Supplier 1: I am ready to supplying!
+Supplier 1: Entered in Shop number 4
+Supplier 1: Shop 4 has 0 products
+Supplier 1: Delivered 749 products to Shop 749
+Supplier 1: Now Shop 4 has 749 products
+
+Supplier 1: I need to sleep before another delivery
+
+Supplier 3: I am ready to supplying!
+Supplier 3: Entered in Shop number 5
+Supplier 3: Shop 5 has 3145 products
+Supplier 3: Delivered 358 products to Shop 3503
+Supplier 3: Now Shop 5 has 3503 products
+
+Supplier 3: I need to sleep before another delivery
+
+Supplier 5: I am ready to supplying!
+Supplier 5: Entered in Shop number 1
+Supplier 5: Shop 1 has 5444 products
+Supplier 5: Delivered 508 products to Shop 5952
+Supplier 5: Now Shop 1 has 5952 products
+
+Supplier 5: I need to sleep before another delivery
+
+Supplier 4: I am ready to supplying!
+Supplier 2: I am ready to supplying!
+Supplier 2: Entered in Shop number 3
+Supplier 4: Entered in Shop number 5
+Supplier 2: Shop 3 has 4011 products
+Supplier 4: Shop 5 has 3503 products
+Supplier 2: Delivered 703 products to Shop 4714
+Supplier 4: Delivered 472 products to Shop 3975
+Supplier 4: Now Shop 5 has 3975 products
+Supplier 2: Now Shop 3 has 4714 products
+
+
+Supplier 4: I need to sleep before another delivery
+
+Supplier 2: I need to sleep before another delivery
+
+Supplier 1: I am ready to supplying!
+Supplier 1: Entered in Shop number 2
+Supplier 1: Shop 2 has 3366 products
+Supplier 1: Delivered 749 products to Shop 4115
+Supplier 1: Now Shop 2 has 4115 products
+
+Supplier 1: I need to sleep before another delivery
+
+Supplier 3: I am ready to supplying!
+Supplier 3: Entered in Shop number 2
+Supplier 3: Shop 2 has 4115 products
+Supplier 3: Delivered 358 products to Shop 4473
+Supplier 3: Now Shop 2 has 4473 products
+
+Supplier 3: I need to sleep before another delivery
+
+Supplier 5: I am ready to supplying!
+Supplier 5: Entered in Shop number 5
+Supplier 5: Shop 5 has 3975 products
+Supplier 5: Delivered 508 products to Shop 4483
+Supplier 5: Now Shop 5 has 4483 products
+
+Supplier 5: I need to sleep before another delivery
+
+Supplier 4: I am ready to supplying!
+Supplier 4: Entered in Shop number 4
+Supplier 4: Shop 4 has 749 products
+Supplier 4: Delivered 472 products to Shop 1221
+Supplier 4: Now Shop 4 has 1221 products
+
+Supplier 4: I need to sleep before another delivery
+
+Supplier 2: I am ready to supplying!
+Supplier 2: Entered in Shop number 1
+Supplier 2: Shop 1 has 5952 products
+Supplier 2: Delivered 703 products to Shop 6655
+Supplier 2: Now Shop 1 has 6655 products
+
+Supplier 2: I need to sleep before another delivery
+
+Supplier 1: I am ready to supplying!
+Supplier 1: Entered in Shop number 4
+Supplier 1: Shop 4 has 1221 products
+Supplier 1: Delivered 749 products to Shop 1970
+Supplier 1: Now Shop 4 has 1970 products
+
+Supplier 1: I need to sleep before another delivery
+
+Supplier 3: I am ready to supplying!
+Supplier 3: Entered in Shop number 5
+Supplier 3: Shop 5 has 4483 products
+Supplier 3: Delivered 358 products to Shop 4841
+Supplier 3: Now Shop 5 has 4841 products
+
+Supplier 3: I need to sleep before another delivery
+
+Supplier 5: I am ready to supplying!
+Supplier 5: Entered in Shop number 5
+Supplier 5: Shop 5 has 4841 products
+Supplier 5: Delivered 508 products to Shop 5349
+Supplier 5: Now Shop 5 has 5349 products
+
+Supplier 5: I need to sleep before another delivery
+
+Customer 1: Ok, I've got all what I need. Let's go home
+Customer 3: I am ready to shopping!!!
+Customer 3: I need 3576 products for now
+Customer 3: Hooray, I am finally in the shop 2!
+Customer 3: I've bought 4473 products
+Customer 3: And I don't need anymore!
+
+Customer 3: Shopping is tiresome... I need to sleep
+
+Supplier 4: I am ready to supplying!
+Supplier 4: Entered in Shop number 3
+Supplier 4: Shop 3 has 4714 products
+Supplier 4: Delivered 472 products to Shop 5186
+Supplier 4: Now Shop 3 has 5186 products
+
+Supplier 4: I need to sleep before another delivery
+
+Supplier 1: I am ready to supplying!
+Supplier 1: Entered in Shop number 5
+Supplier 1: Shop 5 has 5349 products
+Supplier 1: Delivered 749 products to Shop 6098
+Supplier 1: Now Shop 5 has 6098 products
+
+Supplier 1: I need to sleep before another delivery
+
+Supplier 2: I am ready to supplying!
+Supplier 2: Entered in Shop number 5
+Supplier 2: Shop 5 has 6098 products
+Supplier 2: Delivered 703 products to Shop 6801
+Supplier 2: Now Shop 5 has 6801 products
+
+Supplier 2: I need to sleep before another delivery
+
+Supplier 3: I am ready to supplying!
+Supplier 3: Entered in Shop number 4
+Supplier 3: Shop 4 has 1970 products
+Supplier 3: Delivered 358 products to Shop 2328
+Supplier 3: Now Shop 4 has 2328 products
+
+Supplier 3: I need to sleep before another delivery
+
+Supplier 5: I am ready to supplying!
+Supplier 5: Entered in Shop number 5
+Supplier 5: Shop 5 has 6801 products
+Supplier 5: Delivered 508 products to Shop 7309
+Supplier 5: Now Shop 5 has 7309 products
+
+Supplier 5: I need to sleep before another delivery
+
+Supplier 4: I am ready to supplying!
+Supplier 4: Entered in Shop number 2
+Supplier 4: Shop 2 has 0 products
+Supplier 4: Delivered 472 products to Shop 472
+Supplier 4: Now Shop 2 has 472 products
+
+Supplier 4: I need to sleep before another delivery
+
+Supplier 2: I am ready to supplying!
+Supplier 2: Entered in Shop number 1
+Supplier 2: Shop 1 has 6655 products
+Supplier 2: Delivered 703 products to Shop 7358
+Supplier 2: Now Shop 1 has 7358 products
+
+Supplier 2: I need to sleep before another delivery
+
+Supplier 1: I am ready to supplying!
+Supplier 1: Entered in Shop number 3
+Supplier 1: Shop 3 has 5186 products
+Supplier 1: Delivered 749 products to Shop 5935
+Supplier 1: Now Shop 3 has 5935 products
+
+Supplier 1: I need to sleep before another delivery
+
+Supplier 3: I am ready to supplying!
+Supplier 3: Entered in Shop number 5
+Supplier 3: Shop 5 has 7309 products
+Supplier 3: Delivered 358 products to Shop 7667
+Supplier 3: Now Shop 5 has 7667 products
+
+Supplier 3: I need to sleep before another delivery
+
+Supplier 5: I am ready to supplying!
+Supplier 5: Entered in Shop number 2
+Supplier 5: Shop 2 has 472 products
+Supplier 5: Delivered 508 products to Shop 980
+Supplier 5: Now Shop 2 has 980 products
+
+Supplier 5: I need to sleep before another delivery
+
+Supplier 4: I am ready to supplying!
+Supplier 4: Entered in Shop number 4
+Supplier 4: Shop 4 has 2328 products
+Supplier 4: Delivered 472 products to Shop 2800
+Supplier 4: Now Shop 4 has 2800 products
+
+Supplier 4: I need to sleep before another delivery
+
+Supplier 2: I am ready to supplying!
+Supplier 2: Entered in Shop number 5
+Supplier 2: Shop 5 has 7667 products
+Supplier 2: Delivered 703 products to Shop 8370
+Supplier 2: Now Shop 5 has 8370 products
+
+Supplier 2: I need to sleep before another delivery
+
+Supplier 1: I am ready to supplying!
+Supplier 1: Entered in Shop number 4
+Supplier 1: Shop 4 has 2800 products
+Supplier 1: Delivered 749 products to Shop 3549
+Supplier 1: Now Shop 4 has 3549 products
+
+Supplier 1: I need to sleep before another delivery
+
+Supplier 3: I am ready to supplying!
+Supplier 3: Entered in Shop number 2
+Supplier 3: Shop 2 has 980 products
+Supplier 3: Delivered 358 products to Shop 1338
+Supplier 3: Now Shop 2 has 1338 products
+
+Supplier 3: I need to sleep before another delivery
+
+Supplier 5: I am ready to supplying!
+Supplier 5: Entered in Shop number 5
+Supplier 5: Shop 5 has 8370 products
+Supplier 5: Delivered 508 products to Shop 8878
+Supplier 5: Now Shop 5 has 8878 products
+
+Supplier 5: I need to sleep before another delivery
+
+Customer 3: Ok, I've got all what I need. Let's go home
+
+
+Boss: Hey, all the customers are served. From now on we closed down today!
+
+
+Supplier 4: Ok, Boss, understood. Turn off my delivery script...
+Supplier 2: Ok, Boss, understood. Turn off my delivery script...
+Supplier 1: Ok, Boss, understood. Turn off my delivery script...
+Supplier 3: Ok, Boss, understood. Turn off my delivery script...
+Supplier 5: Ok, Boss, understood. Turn off my delivery script...
