@@ -64,7 +64,7 @@ int main(void)
             perror("mq_open (write)");
         }
 
-        if (-1 == mq_send(mq_id, msg_txt[0], MSG_SIZE, 11))
+        if (-1 == mq_send(mq_id, msg_txt[0], MSG_SIZE, 15))
         {
             perror("mq_send (1)");
         }
