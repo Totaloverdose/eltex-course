@@ -16,8 +16,8 @@
 #define MESSAGE_LENGTH_MAX 256
 
 /**
- * @brief chat_username must be filled. The other fields
- * will be initialized by the server.
+ * @brief You should see if your queue names are unique
+ * yourself
  *
  */
 typedef struct chat_user
@@ -38,7 +38,7 @@ typedef struct message
  * @brief The server may deny your authorization trial
  * if you send an existing username or if this username isn't
  * allowed. Then you should send a new username (just a string) to the server
- * through the new write_queue_name queue to get access to the chat
+ * through the write queue to get access to the chat
  */
 typedef struct server_answer
 {
@@ -48,9 +48,10 @@ typedef struct server_answer
 
 /**
  * @brief You should send a chat_user structure
- * instanse pointer through the reception message queue.
- * Then you can read from a new queue with the read_queue_name name to
- * find out if your client accepted or denied
+ * instanse through the reception message queue
+ *
+ * @param usr
+ * @param reception_mq_id
  */
 void send_message(struct chat_user *usr, mqd_t reception_mq_id);
 /**

@@ -19,8 +19,10 @@ typedef struct chat_user
 typedef struct user_list
 {
     bool is_authorized;
+    mqd_t read_queue_id;
+    mqd_t write_queue_id;
     struct chat_user user;
-    struct chat_user *next;
+    struct user_list *next;
 } user_list;
 
 typedef struct message
@@ -33,7 +35,7 @@ typedef struct message
 typedef struct message_list
 {
     struct message msg;
-    struct message *next;
+    struct message_list *next;
 } message_list;
 
 typedef struct server_answer
@@ -84,6 +86,20 @@ void add_new_users(
     struct user_list **last_user,
     struct message_list **last_message);
 /**
+ * @brief Create a user list element object
+ *
+ * @param user
+ * @return struct user_list*
+ */
+struct user_list *create_user_list_element(struct chat_user **user);
+/**
+ * @brief Create a welcome message object
+ *
+ * @param msg_txt
+ * @return struct message_list*
+ */
+struct message_list *create_welcome_message(char *msg_txt);
+/**
  * @brief Receive new messages from users and
  * send these messages to others
  *
@@ -100,7 +116,7 @@ void sync_accounts(
  * @param new_user
  * @param user_data
  */
-void create_new_user(struct chat_user **new_user, char *user_data);
+struct chat_user *create_new_user(char *user_data);
 
 int main(void)
 {
@@ -144,23 +160,54 @@ void add_first_user(
     char *new_user_buf = malloc(MSG_LEN_MAX);
     int retval = -1;
 
-    while (NULL == new_user)
+    while (NULL == *usr_list)
     {
-        retval = mq_receive(input_mq_id, new_user_buf, MSG_LEN_MAX, NULL);
-        if (-1 == retval && EAGAIN != errno)
+        if (NULL != new_user)
         {
-            perror("Reception mq_receive");
+            free(new_user);
+            new_user = NULL;
+        }
+
+        retval = mq_receive(input_mq_id, new_user_buf, MSG_LEN_MAX, NULL);
+        if (-1 == retval)
+        {
+            if (EAGAIN != errno)
+            {
+                perror("Reception mq_receive");
+            }
         }
         else
         {
-            create_new_user(&new_user, new_user_buf);
-            if (is_user_valid(new_user))
+            printf("new_user_buf: %s\n", new_user_buf);
+            new_user = create_new_user(new_user_buf);
+            if (NULL != new_user)
             {
+                *usr_list = create_user_list_element(&new_user);
+                *usr_list_copy = *usr_list;
+                *msg_list = create_welcome_message(new_user->chat_username);
+                *msg_list_copy = *msg_list;
             }
         }
 
         usleep(SLEEP_TIME);
     }
+
+    free(new_user_buf);
+}
+
+struct chat_user *create_new_user(char *user_data)
+{
+    return NULL;
+}
+
+struct user_list *create_user_list_element(struct chat_user **user)
+{
+    return NULL;
+}
+
+struct message_list *create_welcome_message(char *msg_txt)
+{
+    return NULL;
 }
 
 void add_new_users(
